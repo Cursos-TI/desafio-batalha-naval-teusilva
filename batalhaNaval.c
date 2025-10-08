@@ -1,34 +1,46 @@
 #include <stdio.h>
 
+#define TAM 10
+#define AGUA 0
+#define NAVIO 3
+
 int main()
 {
-    char linha[10] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
-    char tabuleiro[10][10];
-    for (int i = 0; i < 10; i++)
+    char linha[TAM] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+    int tabuleiro[TAM][TAM];
+
+    // Inicializa o tabuleiro com 0 (água)
+    for (int i = 0; i < TAM; i++)
     {
-        for (int j = 0; j < 10; j++)
+        for (int j = 0; j < TAM; j++)
         {
-            tabuleiro[i][j] = '0';
+            tabuleiro[i][j] = AGUA;
         }
     }
-
-    char navioHorizontal[3] = {'3', '3', '3'};
-    char navioVertical[3] = {'3', '3', '3'};
-
-    int linhaHorizontal = 2;
-    int colunaHorizontal = 4;
-
-    int linhaVetical = 6;
-    int colunaVertical = 1;
-
-    for (int i = 0; i < 3; i++)
+    // 1️ Navio horizontal (linha 1, colunas A–C)
+    for (int j = 0; j < 3; j++)
     {
-        tabuleiro[linhaHorizontal][colunaHorizontal + i] = navioHorizontal[i];
+        tabuleiro[1][j] = NAVIO;
     }
 
+    // 2️ Navio vertical (coluna F, linhas 3–5)
+    for (int i = 3; i < 6; i++)
+    {
+        tabuleiro[i][5] = NAVIO;
+    }
+
+    // 3️ Navio diagonal principal — tabuleiro[i][i]
+    // Exemplo: A1, B2, C3
     for (int i = 0; i < 3; i++)
     {
-        tabuleiro[linhaVetical + i][colunaVertical] = navioVertical[i];
+        tabuleiro[i][i] = NAVIO;
+    }
+
+    // 4️  Navio diagonal secundária — tabuleiro[i][9 - i]
+    // Exemplo: A10, B9, C8
+    for (int i = 0; i < 3; i++)
+    {
+        tabuleiro[i][9 - i] = NAVIO;
     }
     printf("\n   "); // Espaço inicial antes das letras para ficar alinhado
 
